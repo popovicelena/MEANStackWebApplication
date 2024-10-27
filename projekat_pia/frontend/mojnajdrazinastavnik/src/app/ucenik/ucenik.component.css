@@ -1,0 +1,9 @@
+.overlay {
+    background-color: rgba(0, 0, 0, 0.5); /* Tamna boja prekrivača */
+    opacity: 0; /* Početna providnost prekrivača */
+    transition: opacity 0.3s ease; /* Glatka tranzicija providnosti */
+}
+
+.img-fluid:hover + .overlay {
+    opacity: 1; /* Prikazivanje prekrivača kada korisnik pređe mišem preko slike */
+}

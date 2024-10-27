@@ -1,0 +1,135 @@
+
+
+<div class="container mt-5">
+  <div class="row">
+   
+    <div class="col-md-12 d-flex justify-content-center align-items-center">
+      <img *ngIf="showimage" src="{{imageBlob}}" class="img-fluid rounded-circle shadow" style="max-width: 400px; max-height: 400px;">
+      <img *ngIf="!showimage" src="assets/default.png" class="img-fluid rounded-circle shadow" style="max-width: 400px; max-height: 400px;">
+    </div>
+  </div>
+</div>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="table-container">
+      <table class="table">
+        <tr>
+          <td><label for="searchfirstname">Firstname:</label></td>
+          <td><input type="text" name="fristname" [(ngModel)]="firstname" class="form-control rounded" placeholder="Firstname" style="width: 300px;"></td>
+        </tr>
+        <tr>
+          <td><label for="searchlastname">Lastname:</label></td>
+          <td><input type="text" name="lastname" [(ngModel)]="lastname" class="form-control rounded" placeholder="Lastname" style="width: 300px;"></td>
+        </tr>
+        <tr>
+          <td><label for="searchusername">Username:</label></td>
+          <td><input type="text" name="username" [(ngModel)]="username" class="form-control rounded" placeholder="Username" style="width: 300px;"></td>
+        </tr>
+        <tr>
+          <td><label for="searchpassword">Password:</label></td>
+          <td>
+            <input type="password" name="password" [(ngModel)]="password" [formControl]="passwordControl" class="form-control rounded" placeholder="Password" style="width: 300px;">
+            <div *ngIf="passwordControl.invalid && (passwordControl.dirty || passwordControl.touched)">
+              <div *ngIf="passwordControl.hasError('pattern')">Password doesn't meet requirements.</div>
+              <div *ngIf="passwordControl.hasError('required')">Password is requred.</div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="searchconfirm">Confirm password:</label></td>
+          <td>
+            <input type="password" name="confirm" [(ngModel)]="confirm"  class="form-control rounded" placeholder="Confirm Password" style="width: 300px;">
+            <div *ngIf="confirm !=password">Incorrect password.</div>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="searchemail">Email:</label></td>
+          <td><input type="text" name="email" [(ngModel)]="email"  class="form-control rounded" placeholder="Email" style="width: 300px;"></td>
+        </tr>
+        <tr>
+          <td><label>Type:</label></td>
+          <td>
+            
+            <select name="type" [(ngModel)]="type" class="form-select form-select-sm rounded">
+              <option value="ucenik">student</option>
+              <option value="nastavnik">teacher</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="searchaddress">Address:</label></td>
+          <td><input type="text" name="adresa" [(ngModel)]="adresa"  class="form-control rounded" placeholder="Address" style="width: 300px;"></td>
+        </tr>
+        <tr>
+          <td><label for="searchphone">Phone:</label></td>
+          <td>
+            <input type="tel" name="telefon" [(ngModel)]="telefon" [formControl]="telefonInput"  required placeholder="Phone:XXX-XXX-XXXX" style="width: 300px;" class="form-control rounded">
+            <div *ngIf="telefonInput.invalid && (telefonInput.dirty || telefonInput.touched)" >
+              <div *ngIf="telefonInput.hasError('pattern')">Phone number must be in the format: XXX-XXX-XXXX</div>
+              
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><label>Gender</label></td>
+          <td>
+            
+            <label>
+                <input type="radio" name="gender" value="muski" [(ngModel)]="pol" required> M
+            </label>
+            <label>
+                <input type="radio" name="gender" value="zenski" [(ngModel)]="pol" required> F
+            </label>
+        </td>
+        </tr>
+        <tr>
+          <td><label for="searchsafetyquestion">Safety question:</label></td>
+          <td><input type="text" name="safetyquestion" [(ngModel)]="pitanje"  class="form-control rounded" placeholder="Safety question" style="width: 300px;"></td>
+        </tr>
+        <tr>
+          <td><label for="searchresponse">Response:</label></td>
+          <td><input type="text" name="response" [(ngModel)]="odgovor"  class="form-control rounded" placeholder="Response" style="width: 300px;"></td>
+        </tr>
+        <tr>
+          <td>Profile picture:</td>
+          <td>
+            <div class="d-flex justify-content-center mt-3">
+              <input type="file" (change)="onFileSelected($event)">
+              <button *ngIf="format==false && size==false" (click)="onUpload()" class="btn custom-button mx-1 rounded-pill" >Upload file</button>
+            </div>
+            <div *ngIf="format==true">
+              Format has to be .png or .jpeg!
+            </div>
+            <div *ngIf="size==true">
+              Min size 100x100px, max size 300x300px!
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <div class="d-flex justify-content-center mt-3">
+              <button class="btn custom-button mx-1 rounded-pill"  (click)="register()" >Continue</button>
+              
+             
+            </div>
+            <div class="d-flex justify-content-center mt-3">
+              <button class="btn custom-button mx-1 rounded-pill"   (click)="backtohomepage()" >&#8592;BackToHomePge</button>
+              
+             
+            </div>
+            <span class="greska">{{message}}</span>
+          </td>
+        </tr>
+       
+      </table>
+     
+    </div>
+    </div>
+  </div>
+</div>
+
+
+
+           
+    

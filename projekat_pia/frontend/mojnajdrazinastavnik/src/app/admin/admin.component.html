@@ -1,0 +1,296 @@
+
+<nav class="navbar navbar-expand-lg navbar-light teal-green justify-content-between"> 
+    <div class="container">
+        <div class="navbar-nav">
+           
+            <button (click)="logout()" class="btn custom-button mx-1 rounded-pill"><i class="fas fa-sign-out-alt"></i>🔓 Logout</button>
+            <a routerLink="/changepassword" class="nav-item nav-link">🔑 Change password</a>
+            
+        </div>
+        <div class="col-auto">
+          
+                      
+            <img src="assets/default.png" class="img-fluid rounded-circle" style="width: 50px; height: 50px;">
+            
+        </div>
+            
+        </div>
+    
+</nav>
+<br/>
+
+
+
+
+<div class="container mt-5">
+  <div class="row justify-content-right">
+    <div class="col-md-6">
+      <div class="table-container">
+          
+      
+          <table class="table">
+
+            <tr>
+              <th style="text-align: center;">All teachers</th>
+            <th style="text-align: center;">All students</th>
+            </tr>
+            
+           
+                    <td>
+                        <ul class="list-unstyled">
+                            <li *ngFor="let t of activeTeachers"><span class="bullet">&#8226;</span> {{t.firstname}} {{t.lastname}}</li>
+                        </ul>
+                    </td>
+                    <td>
+                      <ul class="list-unstyled">
+                          <li *ngFor="let s of allStudents"><span class="bullet">&#8226;</span> {{s.firstname}} {{s.lastname}}</li>
+                      </ul>
+                  </td>
+
+              
+          </table>
+      </div>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+<div class="container mt-5">
+    <div class="row justify-content-right">
+      <div class="col-md-6">
+        <div class="table-container">
+            <h3>Requests</h3>
+        
+                 <table *ngIf="teachers.length>0; else noRequests" class="table">
+
+    
+                <tr>
+                    <th>Username</th>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>CV</th>
+                    <th>A/D</th>
+                </tr>
+                <tr *ngFor="let t of teachers">
+                    <td>{{t.username}}</td>
+                    <td>{{t.firstname}}</td>
+                    <td>{{t.lastname}}</td>
+                    <td>
+                        <div class="d-flex justify-content-center mt-0">
+                            <button class="btn custom-button mx-1 rounded-pill" (click)="downloadPdf(t.cv,t.username)">Review resume</button>
+                         
+                        </div>
+                        
+                 </td>
+
+                
+                <td>
+                    <div class="d-flex justify-content-center mt-0">
+
+                        <button class="btn custom-button mx-1 rounded-pill" (click)="accept(t.username)">Accept</button>
+                        <button class="btn custom-button mx-1 rounded-pill" (click)="deny(t.username)">Deny</button>
+                    </div>
+             
+                </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+  </div>
+</div>
+            
+            <br/>
+ <div class="container mt-5">
+    <div class="row justify-content-right">
+         <div class="col-md-6">
+            <div class="table-container">
+            <h3>Subject proposals</h3>
+            <table *ngIf="predlozi.length>0;else noPredlozi" class="table">
+                <tr>
+                    <th>Subject</th>
+                    <th>A/D</th>
+                </tr>
+                <tr *ngFor="let s of predlozi">
+                    <td>
+                        <label> {{s.subject}}</label>
+                       
+                    </td>
+                    <td >
+                        <div class="d-flex justify-content-center mt-0">
+                            <button class="btn custom-button mx-1 rounded-pill"  (click)="acceptPredlog(s.subject)">Accept</button>
+                            <button class="btn custom-button mx-1 rounded-pill"  (click)="denyPredlog(s.subject)">Deny</button>
+                          
+                         
+                        </div>
+                        
+                    </td>
+                   
+                   
+                </tr>
+                <span class="greska">{{greska}}</span>
+            </table>
+            </div>
+         </div>
+    </div>
+ </div>
+ 
+
+ <div class="container mt-5">
+    <div class="row justify-content-right">
+         <div class="col-md-6">
+            <div class="table-container">
+            <h3>Add subject</h3>
+            <table class="table">
+                <tr>
+                    <td><label>Subject name:</label></td>
+                    <td>
+                        <input type="text" name="newsubj" [(ngModel)]="newsubject" class="form-control rounded" placeholder="subject name">
+                    </td>
+                    <td>
+                    <div class="d-flex justify-content-center mt-0">
+                        <button class="btn custom-button mx-1 rounded-pill" (click)="addSubject()">Add</button>
+                    </div>
+                    
+                    </td>
+                    
+                </tr>
+                  
+                <span class="greska">{{errormessage}}</span>
+            </table>
+            </div>
+         </div>
+    </div>
+ </div>
+ 
+      
+  
+  
+<!-- 
+<div *ngIf="ready" style="display: block;">
+    <canvas *ngIf="ready" baseChart width="400" height="400"
+      [type]="'line'"
+      [data]="lineChartData"
+      [options]="lineChartOptions"
+      [legend]="lineChartLegend">
+    </canvas>
+  </div>
+
+<div *ngIf="barChartData.labels.length > 0"> 
+  <canvas baseChart width="400" height="400"
+        [data]="barChartData"
+        [options]="barChartOptions"
+        [plugins]="barChartPlugins"
+        [legend]="barChartLegend"
+        [type]="'bar'">
+</canvas>
+</div>
+<div *ngIf="readybar"> 
+    <canvas baseChart width="400" height="400"
+          [data]="barChartDataD"
+          [options]="barChartOptions"
+          [plugins]="barChartPlugins"
+          [legend]="barChartLegend"
+          [type]="'bar'">
+  </canvas>
+  </div>
+
+<canvas baseChart
+  [type]="'pie'"
+  [datasets]="pieChartDatasets"
+  [labels]="pieChartLabels"
+  [options]="pieChartOptions"
+  [plugins]="pieChartPlugins"
+  [legend]="pieChartLegend">
+</canvas>
+
+<canvas baseChart
+  [type]="'pie'"
+  [datasets]="pieChartDatasetsT"
+  [labels]="pieChartLabels"
+  [options]="pieChartOptions"
+  [plugins]="pieChartPlugins"
+  [legend]="pieChartLegend">
+</canvas> -->
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div *ngIf="ready" style="display: block;">
+          <canvas baseChart width="400" height="400"
+            [type]="'line'"
+            [data]="lineChartData"
+            [options]="lineChartOptions"
+            [legend]="lineChartLegend">
+          </canvas>
+        </div>
+      </div>
+      
+      <div class="col-md-6">
+        <div *ngIf="barChartData.labels.length > 0"> 
+          <canvas baseChart width="400" height="400"
+            [data]="barChartData"
+            [options]="barChartOptions"
+            [plugins]="barChartPlugins"
+            [legend]="barChartLegend"
+            [type]="'bar'">
+          </canvas>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+
+        <div class="col-md-6">
+            <h5 style="color: #008080;">Number of teachers</h5>
+            <canvas baseChart
+              [type]="'pie'"
+              [datasets]="pieChartDatasetsT"
+              [labels]="pieChartLabels"
+              [options]="pieChartOptions"
+              [plugins]="pieChartPlugins"
+              [legend]="pieChartLegend">
+            </canvas>
+          </div>
+    
+     
+      <div class="col-md-6">
+        <h5 style="color: #008080;">Number of students</h5>
+        <canvas baseChart
+          [type]="'pie'"
+          [datasets]="pieChartDatasets"
+          [labels]="pieChartLabels"
+          [options]="pieChartOptions"
+          [plugins]="pieChartPlugins"
+          [legend]="pieChartLegend"  >
+        </canvas>
+      </div>
+    </div>
+    <div class="row">
+    
+        <div class="col-md-6">
+            <div *ngIf="readybar"> 
+              <canvas baseChart width="400" height="400"
+                [data]="barChartDataD"
+                [options]="barChartOptions"
+                [plugins]="barChartPlugins"
+                [legend]="barChartLegend"
+                [type]="'bar'">
+              </canvas>
+            </div>
+          </div>
+    </div>
+  </div>
+  
+
+<ng-template #noRequests>
+    No requests
+</ng-template>
+<ng-template #noPredlozi>
+    No subject proposals
+</ng-template>
+
+
+  

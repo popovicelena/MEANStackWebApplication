@@ -1,0 +1,39 @@
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="table-container">
+            <h3>Safety question</h3>
+        <table class="table">
+        <tr>
+            <td>
+                {{question}}
+            </td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>Response:</td>
+            <td>
+                <input type="text" name="resp" [(ngModel)]="responseFromForm" class="form-control rounded" placeholder="response" style="width: 300px;">
+            </td>
+           
+        </tr>
+        <tr>
+            <td colspan="2">
+              <div class="d-flex justify-content-center mt-3">
+                <button class="btn custom-button mx-1 rounded-pill"   (click)="next()" >Next &#x2794;</button>
+                
+               
+              </div>
+              <span class="greska">{{errormessage}}</span>
+            </td>
+          </tr>
+          
+        </table>
+        </div>
+      </div>
+    </div>
+</div>
+

@@ -1,0 +1,12 @@
+.greska {
+    color: darkred;
+    font-size: 19px;
+    /* Dodajte dodatne stilove prema potrebi */
+}
+
+.custom-select {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* Dodaje senku */
+  }
+  label{
+    color: #008080;
+  }

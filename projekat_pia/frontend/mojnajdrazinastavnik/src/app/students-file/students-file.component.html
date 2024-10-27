@@ -1,0 +1,72 @@
+<nav class="navbar navbar-expand-lg navbar-light teal-green justify-content-between"> 
+    <div class="container">
+        <div class="navbar-nav">
+           
+            <button (click)="logout()" class="btn custom-button mx-1 rounded-pill"><i class="fas fa-sign-out-alt"></i>🔓 Logout</button>
+           
+        </div>
+        <div class="col-auto">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" routerLink="/nastavnik" >Profile</a>
+                
+                <a class="nav-item nav-link" routerLink="/teacherclasses" >Classes</a>
+                <a class="nav-item nav-link" routerLink="/mystudents">My students</a>
+                
+                
+            <img *ngIf="prof.avatar" src="{{prof.avatar}}" class="img-fluid rounded-circle" style="width: 50px; height: 50px;">
+            <img  *ngIf="!prof.avatar" src="assets/default.png" class="img-fluid rounded-circle" style="width: 50px; height: 50px;">
+           
+        </div>
+            
+        </div>
+    </div>
+  </nav>
+  <br/>
+ 
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="table-container">
+            <img *ngIf="user.avatar" src="{{user.avatar}}" class="img-fluid rounded-circle" style="width: 50px; height: 50px;">
+            <img  *ngIf="!user.avatar" src="assets/default.png" class="img-fluid rounded-circle" style="width: 50px; height: 50px;">
+            <label style="color: #008080;">{{user.firstname}} {{user.lastname}}</label>
+            <br/>
+        <table *ngIf="myclasses.length>0;else noClasses" class="table">
+            <tr>
+                <th>Class</th>
+                <th>Time</th>
+                
+                <th>Evaluate student</th>
+                <th>Comment for student</th>
+                <th></th>
+            </tr>
+            <tr *ngFor="let s of myclasses">
+                <td *ngIf="s.teacherusername==teacher">{{s.subject}}</td>
+                <td *ngIf="s.teacherusername==teacher">{{s.formatedtime}}</td>
+                <td *ngIf="s.teacherusername==teacher">
+                    <input type="number"  name="ocena" min="1" max="5" [(ngModel)]="s.teachersgrade" class="form-control rounded">
+                </td>
+                <td *ngIf="s.teacherusername==teacher">
+                    <textarea [(ngModel)]="s.teacherComment" style="border-color: #008080; border-radius: 8px;"></textarea>
+                </td>
+                
+                <td>
+                    <div class="d-flex justify-content-center mt-0">
+          
+                        <button class="btn custom-button mx-1 rounded-pill" (click)="submit(s.idN,s.teachersgrade,s.teacherComment)">Submit</button>
+                        
+                       
+                      </div>
+                      <span class="greska">{{errormessage}}</span>
+                   
+                </td>
+            </tr>
+        </table>
+        </div>
+      </div>
+    </div>
+</div>
+<ng-template #noClasses>
+    No held classes
+</ng-template>

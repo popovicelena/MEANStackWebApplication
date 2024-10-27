@@ -1,0 +1,109 @@
+<nav class="navbar navbar-expand-lg navbar-light teal-green justify-content-between"> <!-- Dodajte klasu justify-content-between -->
+  <div class="container">
+      <div class="navbar-nav">
+         
+        <button (click)="logout()" class="btn custom-button mx-1 rounded-pill"><i class="fas fa-sign-out-alt"></i>🔓 Logout</button>
+          <a routerLink="/changepassword" class="nav-item nav-link">🔑 Change password</a>
+          
+      </div>
+      <div class="col-auto">
+          <div class="navbar-nav">
+              <a class="nav-item nav-link" routerLink="/ucenik" >Profile</a>
+              
+              <a class="nav-item nav-link" routerLink="/nastavnici" >Teachers</a>
+              <a class="nav-item nav-link" routerLink="/classes">Classes</a>
+              
+              
+          <img *ngIf="ulogovan.avatar && !showimage" src="{{ulogovan.avatar}}" class="img-fluid rounded-circle" style="width: 50px; height: 50px;" routerLink="editprofile">
+          <img *ngIf="!ulogovan.avatar && !showimage" src="assets/default.png" class="img-fluid rounded-circle" style="width: 50px; height: 50px;" routerLink="editprofile">
+          <img *ngIf="showimage" src="{{imageBlob}}"class="img-fluid rounded-circle" style="width: 50px; height: 50px;" routerLink="editprofile">
+          
+      </div>
+          
+      </div>
+  </div>
+</nav>
+<br/>
+<div class="row">
+  <div class="col-md-12 d-flex justify-content-center align-items-center">
+    <img  *ngIf="ulogovan.avatar && !showimage" src="{{ulogovan.avatar}}" class="img-fluid rounded-circle shadow" style="max-width: 400px; max-height: 400px;">
+    <img  *ngIf="!ulogovan.avatar && !showimage" src="assets/default.png" class="img-fluid rounded-circle shadow" style="max-width: 400px; max-height: 400px;">
+    <img *ngIf="showimage" src="{{imageBlob}}" class="img-fluid rounded-circle shadow" class="img-fluid rounded-circle shadow" style="max-width: 400px; max-height: 400px;">
+    
+  </div>
+</div>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="table-container">
+        <table class="table">
+            <tr>
+                <th>Firstname </th>
+                <input type="text"  [(ngModel)]="firstname"  class="form-control rounded" style="width: 250px;">
+            </tr>
+            <tr>
+                <th>Lastname </th>
+                <input type="text"  [(ngModel)]="lastname" class="form-control rounded" style="width: 250px;" >
+            </tr>
+            <tr>
+                <th>Address </th>
+                <input type="text"   [(ngModel)]="address" class="form-control rounded" style="width: 250px;">
+            </tr>
+            <tr>
+                <th>email </th>
+                <input type="text"  [(ngModel)]="email" class="form-control rounded" style="width: 250px;">
+            </tr>
+            <tr>
+                <th>Phone </th>
+                <input type="text"   [(ngModel)]="phone" class="form-control rounded" style="width: 250px;">
+            </tr> 
+            <tr>
+                <th>School </th>
+                <select name="schoolType" [(ngModel)]="schoolfromform" class="form-select form-select-sm rounded custom-select" style="width: 250px">
+                    <option value="osnovna">Osnovna škola</option>
+                    <option value="srednja-gimnazija">Srednja škola - Gimnazija</option>
+                    <option value="srednja-strucna">Srednja škola - Stručna</option>
+                    <option value="srednja-umetnicka">Srednja škola - Umetnička</option>
+                  </select>
+                
+            </tr>
+            <tr>
+                <th>Grade </th>
+                <input type="text"  [(ngModel)]="gradefromform" class="form-control rounded" style="width: 250px;" >
+            </tr>
+            <tr>
+                <th>Edit  profile picture:</th>
+                <td>
+                  <div class="d-flex justify-content-center mt-3">
+                    <input type="file" (change)="onFileSelected($event)">
+                    <button *ngIf="format==false && size==false" (click)="onUpload()" class="btn custom-button mx-1 rounded-pill" >Upload file</button>
+                  </div>
+                  <div *ngIf="format==true">
+                    Format has to be .png or .jpeg!
+                  </div>
+                  <div *ngIf="size==true">
+                    Min size 100x100px, max size 300x300px!
+                  </div>
+                </td>
+                
+              </tr>
+        </table>
+        <div class="d-flex justify-content-center mt-3">
+ 
+          <button  (click)="cancel()"  class="btn custom-button mx-1 rounded-pill">Cancel</button>
+        
+          <button  (click)="save()"  class="btn custom-button mx-1 rounded-pill" >Save</button>
+          
+          
+        </div>
+        <span class="greska" style="text-align: center;">{{errormessage}}</span>
+        <br/>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

@@ -1,0 +1,146 @@
+<nav class="navbar navbar-expand-lg navbar-light teal-green justify-content-between"> <!-- Dodajte klasu justify-content-between -->
+    <div class="container">
+        <div class="navbar-nav">
+           
+           
+            <button (click)="logout()" class="btn custom-button mx-1 rounded-pill"><i class="fas fa-sign-out-alt"></i>🔓 Logout</button>
+            
+        </div>
+        <div class="col-auto">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" routerLink="/ucenik" >Profile</a>
+                
+                <a class="nav-item nav-link" routerLink="/nastavnici" >Teachers</a>
+                <a class="nav-item nav-link" routerLink="/classes">Classes</a>
+                
+                
+            <img *ngIf="ulogovan.avatar" src="{{ulogovan.avatar}}" class="img-fluid rounded-circle" style="width: 50px; height: 50px;" routerLink="editprofile">
+            <img *ngIf="!ulogovan.avatar" src="assets/default.png" class="img-fluid rounded-circle" style="width: 50px; height: 50px;" routerLink="editprofile">
+            
+        </div>
+            
+        </div>
+    </div>
+  </nav>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="table-container">
+        <table *ngIf="teachers.length>0;else noTeachers" class="table">
+            <tr>
+                <th>Teacher</th>
+                <th>Avg grade</th>
+                <th></th>
+                <th>Subjects</th>
+            </tr>
+            <tr *ngFor="let t of teachers">
+                <td>{{t.firstname}} {{t.lastname}}
+                <br/>
+                <br/>
+                
+                 <a [href] ="'ucenik/nastavnici/teacherDetails?username='+ t.username" id="link" data-username={{t.firstname}} style="color: #008080;">Details</a>
+                </td>
+                
+            <td>
+                
+                <star-rating id="star-rating" [starType]="'svg'" [rating]="t.avggrade" [disabled]="true"></star-rating>
+            </td>
+            <td *ngIf="t.avggrade">
+                {{t.avggrade.toFixed(2)}}
+            </td>
+            <td *ngIf="!t.avggrade">
+               
+            </td>
+                <td>
+                    <ul *ngFor="let s of t.subjects">
+                        <li>{{s}}</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <h3>Search Professors</h3>
+  <div class="row">
+      <div class="col-md-4">
+          <div class="form-group">
+              <label for="searchfirstname">Firstname:</label>
+              <input type="text" class="form-control" id="searchfirstname" [(ngModel)]="searchfirstname">
+          </div>
+      </div>
+      <div class="col-md-4">
+          <div class="form-group">
+              <label for="searchlastname">Lastname:</label>
+              <input type="text" class="form-control" id="searchlastname" [(ngModel)]="searchlastname">
+          </div>
+      </div>
+      <div class="col-md-4">
+          <div class="form-group">
+              <label for="searchsubject">Subject:</label>
+              <input type="text" class="form-control" id="searchsubject" [(ngModel)]="searchsubject">
+          </div>
+      </div>
+  </div>
+  <div class="d-flex justify-content-center mt-3">
+      <button class="btn custom-button mx-1 rounded-pill" (click)="search()">Search</button>
+      </div>
+      <br/>
+
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+              <div class="col-md-6">
+                <div class="table-container">
+                    <table *ngIf="searchedTeachers.length>0; else noTeachersMessage" class="table">
+                        <tr>
+                            <th>Teacher</th>
+                            <!-- <th>Avg grade</th> -->
+                            <th>Subjects</th>
+                        </tr>
+                            <tr *ngFor="let t of searchedTeachers">
+                                <td>{{t.firstname}} {{t.lastname}}
+                                    <br/>
+                                    <br/>
+                                     <a [href] ="'ucenik/nastavnici/teacherDetails?username='+ t.username" id="link" data-username={{t.firstname}} style="color: #008080;">Details</a>
+                                 </td>
+                                 <!-- <td>
+                                    <star-rating id="star-rating" [starType]="'svg'" [rating]="t.avggrade" [disabled]="true"></star-rating>
+                                </td> -->
+                                <td>
+                                    <ul *ngFor="let s of t.subjects">
+                                        <li>
+                                            {{s}}
+                                            
+                                        </li>
+                                    </ul>
+                                    
+                                </td>
+                        </tr>
+                    </table>
+                    
+                </div>
+                
+              </div>
+            </div>
+            
+        </div>
+
+        <ng-template #noTeachersMessage>
+            <div class="text-center" style="font-size: larger;">
+                No such teacher
+            </div>
+        </ng-template>
+        <ng-template #noTeachers>
+            <div class="text-center" style="font-size: larger;">
+                No teachers
+            </div>
+        </ng-template>
+      
+
+
+
+
+

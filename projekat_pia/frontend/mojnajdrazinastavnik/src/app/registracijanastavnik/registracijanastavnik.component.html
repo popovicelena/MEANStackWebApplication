@@ -1,0 +1,71 @@
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="table-container">
+            <table class="table">
+                <tr>
+                   <td> <label>Select the subjects you are applying for:</label></td>
+                   
+                </tr>
+                <tr *ngFor="let s of allSubjects; let i = index">
+                    <td>
+                        <input type="checkbox" name="predmet" id="myCheckbox" [(ngModel)]="selected[i]" >{{s.subject}}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><label>Something else:</label></td>
+                    <td><textarea [(ngModel)]="dodatno" placeholder="optional"  style="border-color: #008080; border-radius: 8px;"></textarea></td>
+                </tr>
+                <tr>
+                    <td><label>What age do you want to teach?</label></td>
+                    <select name="grade" [(ngModel)]="grade" class="form-select form-select-sm rounded custom-select">
+                        <option value="1-4">Osnovna škola 1-4. razred</option>
+                        <option value="5-8">Osnovna škola 5-8. razred</option>
+                        <option value="srednja skola">Srednja škola</option>
+                    </select>
+                </tr>
+                <tr>
+                    <td><label>How did you find out about our site?</label></td>
+                    <textarea  [(ngModel)]="question" rows="4" cols="50"  style="border-color: #008080; border-radius: 8px;"></textarea>
+                </tr>
+                <tr>
+                    <td><label>Your resume:</label></td>
+                    <td>
+                            <input type="file" name="pdfFile" (change)="onFileSelected($event)">
+                        
+                        <div *ngIf="format==true">
+                        format has to be.pdf!
+                    </div>
+                    <div *ngIf="size==true">
+                        max size is 3Mb!
+                    </div>
+                    </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                          <div class="d-flex justify-content-center mt-3">
+                            <button class="btn custom-button mx-1 rounded-pill" (click)="registrujse()" >Register</button>
+                            
+                           
+                          </div>
+                          <span class="greska">{{errormessage}}</span>
+                        </td>
+                     
+                    </tr>
+            </table>
+            <div class="d-flex justify-content-center mt-3">
+          
+                <button class="btn custom-button mx-1 rounded-pill" (click)="back()" >&#8592;Back</button>
+                <button class="btn custom-button mx-1 rounded-pill" (click)="cancel()" >Cancel</button>
+                
+               
+              </div>
+        </div>
+      </div>
+    </div>
+</div>
+<br/>
+
+

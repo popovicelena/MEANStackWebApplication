@@ -1,0 +1,121 @@
+<nav class="navbar navbar-expand-lg navbar-light teal-green justify-content-between"> <!-- Dodajte klasu justify-content-between -->
+    <div class="container">
+        <div class="navbar-nav">
+           
+           
+            <button (click)="logout()" class="btn custom-button mx-1 rounded-pill"><i class="fas fa-sign-out-alt"></i>🔓 Logout</button>
+            
+        </div>
+        <div class="col-auto">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" routerLink="/ucenik" >Profile</a>
+                
+                <a class="nav-item nav-link" routerLink="/nastavnici" >Teachers</a>
+                <a class="nav-item nav-link" routerLink="/classes">Classes</a>
+                
+                
+            <img *ngIf="ulogovan.avatar" src="{{ulogovan.avatar}}" class="img-fluid rounded-circle" style="width: 50px; height: 50px;" routerLink="editprofile">
+            <img *ngIf="!ulogovan.avatar" src="assets/default.png" class="img-fluid rounded-circle" style="width: 50px; height: 50px;" routerLink="editprofile">
+            
+        </div>
+            
+        </div>
+    </div>
+  </nav>
+
+
+<div class="container mt-5">
+    <div class="row justify-content-right">
+      <div class="col-md-6">
+        <div class="table-container">
+            <h3>Held classes</h3>
+        <table *ngIf="pastClasses(); else noClasses" class="table">
+
+                <tr>
+                    <th>Teacher</th>
+                    <th>Subject</th>
+                    <th>Begin</th>
+                    <th>End</th>
+                    <th>Teachers comment</th>
+                    <th></th>
+                    <th *ngIf="show">Your comment</th>
+                    <th *ngIf="show">Rating</th>
+                    <th></th>
+
+                </tr>
+                <tr *ngFor="let s of student.scheduledClasses">
+                    <td *ngIf="s.end<now">{{s.teacherFirstname}} {{s.teacherLastname}}</td>
+                    <td *ngIf="s.end<now">{{s.subject}}</td>
+                    <td *ngIf="s.end<now">{{s.formatedBegin}}</td>
+                    <td *ngIf="s.end<now">{{s.formattedEnd}}</td>
+                    <td *ngIf="s.teacherComment && s.end<now">{{s.teacherComment}}</td>
+                    <td *ngIf="!s.teacherComment && s.end<now" style="text-align: center;">/</td>
+                    <td *ngIf="!s.mycom && s.end<now">
+                        <div class="d-flex justify-content-center mt-3">
+                            <button (click)="click(s.idN)" class="btn custom-button mx-1 rounded-pill">Leave a comment</button>
+                        </div>
+                    </td>
+                    <td *ngIf="show && s.end<now && s.idN==id && !s.mycom">
+                        <textarea [(ngModel)]="comment"  style="border-color: #008080; border-radius: 8px;"></textarea>
+                    </td>
+                    <td *ngIf="show && s.end<now && s.idN==id && !s.mycom">
+                        <!-- <star-rating id="star-rating" [starType]="'svg'" [rating]="2.5" (ratingChange)="onRatingChange($event)"></star-rating> -->
+                        <star-rating
+                        [hoverEnabled]="true"
+                        (ratingChange)="onRatingChange($event)"
+                        >
+                    </star-rating>
+                    </td>
+                    <td *ngIf="show && s.end<now && s.idN==id && !s.mycom">
+                        <div class="d-flex justify-content-center mt-3">
+                            <button (click)="submit(s.idN)" class="btn custom-button mx-1 rounded-pill">Submit</button>
+                        </div>
+                    
+                    </td>
+                    
+                </tr>
+        </table>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+<div class="container mt-5">
+    <div class="row justify-content-right">
+      <div class="col-md-6">
+        <div class="table-container">
+            <h3>Upcoming classes</h3>
+        <table *ngIf="futureClasses(); else noClasses" class="table">
+
+            <tr>
+                <th>Teacher</th>
+                <th>Subject</th>
+                <th>Begin</th>
+                <th>End</th>
+                <th>Teachers comment</th>
+                <th>Topics</th>
+                <th></th>
+
+            </tr>
+            
+            <tr *ngFor="let s of student.scheduledClasses">
+                <td *ngIf="s.begin>now || s.begin<=now && s.end>=now">{{s.teacherFirstname}} {{s.teacherLastname}}</td>
+                <td *ngIf="s.begin>now || s.begin<=now && s.end>=now">{{s.subject}}</td>
+                <td *ngIf="s.begin>now || s.begin<=now && s.end>=now">{{s.formatedBegin}}</td>
+                <td *ngIf="s.begin>now || s.begin<=now && s.end>=now">{{s.formattedEnd}}</td>
+                <td *ngIf="s.teacherComment && (s.begin>now || s.begin<=now && s.end>=now)">{{s.teacherComment}}</td>
+                <td *ngIf="!s.teacherComment && (s.begin>now || s.begin<=now && s.end>=now)" style="text-align: center;">/</td>
+                <td *ngIf="s.theme && (s.begin>now || s.begin<=now && s.end>=now)">{{s.theme}}</td>
+                <td *ngIf="!s.theme && (s.begin>now || s.begin<=now && s.end>=now)" style="text-align: center;">/</td>
+                <td *ngIf="s.begin<=now && s.end>=now">Ongoing</td>
+            </tr>
+
+        </table>
+        </div>
+      </div>
+    </div>
+</div>
+<ng-template #noClasses>
+    No such classes
+</ng-template>

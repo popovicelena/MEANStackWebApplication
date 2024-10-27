@@ -1,0 +1,10 @@
+input::placeholder {
+    color: #999; /* Primer boje (narandžasta) */
+  }
+  input.form-control:focus {
+    outline: none; /* Uklanja spoljni okvir kada je fokusirano */
+    border-bottom-color: #008080; /* Menja boju donje ivice kada je fokusirano */
+}
+.greska{
+  color: darkred;
+}

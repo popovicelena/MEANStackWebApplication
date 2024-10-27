@@ -1,0 +1,153 @@
+@import '~css-star-rating/css/star-rating';
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.teal-green {
+    background-color: #008080; /* Karamel boja */
+}
+.greska {
+    color: darkred;
+    font-size: 19px;
+    /* Dodajte dodatne stilove prema potrebi */
+}
+.custom-button {
+  color: #F5FFFA; /* Bela boja teksta */
+  background-color: #008080; /* Teal boja */
+  border-color: #008080; /* Teal boja */
+}
+
+.custom-button:hover {
+  background-color: #006666; /* Tamnija nijansa za hover efekat */
+  border-color: #006666; /* Tamnija nijansa za hover efekat */
+}
+
+body {
+    background-color: #F5FFFA; /*boja pozadine svih stranica*/
+    
+}
+
+.form-control {
+    border-radius: 5px; /* Zaobljeni rubovi */
+    border: 1px solid #D3D3D3; /* Granica */
+    padding: 10px; /* Prostor unutar polja */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Senka */
+  }
+  
+  /* Dodatni stilovi za input polja kada su fokusirana */
+  .form-control:focus {
+    border-color: #D3D3D3; /* Boja granice kada je polje fokusirano */
+    outline: 0; /* Uklanjanje vanjskog oznake */
+    box-shadow: 0 0 0 0.3rem rgba(0, 123, 255, 0.25); /* Senka kada je polje fokusirano */
+  }
+
+  .table {
+    border-radius: 10px; /* Dodavanje zaobljenih ivica */
+    border-collapse: collapse; /* Spajanje ivica ćelija */
+}
+
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.6);
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.table th, .table td {
+  padding: 12px 15px;
+  text-align: left;
+  
+}
+
+.table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  align-items: center;
+  
+  
+}
+.table td label{
+ 
+  color: #008080;
+}
+
+.table th {
+  background-color: #008080;
+  color: #F5FFFA;
+  font-weight: bold;
+  
+ 
+}
+
+.table tbody tr:first-child {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.table tbody tr:last-child {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.table {
+    background-color: white; /* Boja pozadine za tablu */
+}
+
+.nav-item.nav-link {
+    color: #F5FFFA; /* Boja teksta linkova */
+    transition: color 0.3s ease;
+  }
+  .nav-item.nav-link:hover {
+    color: #dcdcdc; /* Boja teksta linkova na hover */
+  }
+  
+    /* boja mojnajdrazinastavnik */
+    .navbar-text {
+      color: #F5FFFA;
+      font-weight: bold;
+      
+  }
+  .img-fluid {
+    border: 2px solid #008080; /*dodaje liniju oko slike*/
+  }
+
+  .custom-select {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* Dodaje senku */
+  }
+
+  h3 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    font-weight: bold; /* Pojačanje debljine fonta za naslov */
+    color: #333; /* Boja teksta */
+  }
+
+  input.form-control {
+    border: none; /* Uklanja okvir */
+    border-bottom: 1px solid #ccc; /* Dodaje donju ivicu */
+    border-radius: 0; /* Uklanja zaobljenost ivica */
+    padding: 5px 0; /* Dodaje malo razmaka između teksta i linije */
+    background-color: transparent; /* Uklanja pozadinsku boju */
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3); /* Uklanja senku */
+    transition: border-color 0.2s; /* Dodaje glatku tranziciju za boju ivice */
+}
+
+/* Stil za input polje kada je fokusirano */
+input.form-control:focus {
+    outline: none; /* Uklanja spoljni okvir kada je fokusirano */
+    border-bottom-color: #008080; /* Menja boju donje ivice kada je fokusirano */
+}
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #f8f9fa;
+  padding: 10px 0;
+  text-align: center;
+  border-top: 1px solid #e9ecef;
+}
+  

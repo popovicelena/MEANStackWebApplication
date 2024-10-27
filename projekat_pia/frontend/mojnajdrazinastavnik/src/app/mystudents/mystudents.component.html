@@ -1,0 +1,49 @@
+<nav class="navbar navbar-expand-lg navbar-light teal-green justify-content-between"> 
+    <div class="container">
+        <div class="navbar-nav">
+           
+            <button (click)="logout()" class="btn custom-button mx-1 rounded-pill"><i class="fas fa-sign-out-alt"></i>🔓 Logout</button>
+           
+        </div>
+        <div class="col-auto">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" routerLink="/nastavnik" >Profile</a>
+                
+                <a class="nav-item nav-link" routerLink="/teacherclasses" >Classes</a>
+                <a class="nav-item nav-link" routerLink="/mystudents">My students</a>
+                
+                
+            <img *ngIf="user.avatar" src="{{user.avatar}}" class="img-fluid rounded-circle" style="width: 50px; height: 50px;">
+            <img  *ngIf="!user.avatar" src="assets/default.png" class="img-fluid rounded-circle" style="width: 50px; height: 50px;">
+           
+        </div>
+            
+        </div>
+    </div>
+  </nav>
+  <br/>
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="table-container">
+            
+                <table class="table" >
+
+                    <tr>
+                        
+                        <th>Student</th>
+                        <th>Students file</th>
+                    </tr>
+                    <tr *ngFor="let s of students">
+                        <td>{{s.firstname}} {{s.lastname}}</td>
+                        <td>
+                            <a [href] ="'nastavnik/mystudents/studentsFile?username='+ s.username" id="link" style="color: #008080;">{{s.firstname}} {{s.lastname}}</a>
+                        </td>
+                    </tr>
+                </table>
+        </div>
+      </div>
+    </div>
+</div>

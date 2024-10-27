@@ -1,0 +1,81 @@
+
+<nav class="navbar navbar-expand-lg navbar-light teal-green justify-content-between"> 
+    <div class="container">
+        <div class="navbar-nav">
+           
+            <button (click)="logout()" class="btn custom-button mx-1 rounded-pill"><i class="fas fa-sign-out-alt"></i>🔓 Logout</button>
+            <a routerLink="/changepassword" class="nav-item nav-link">🔑 Change password</a>
+            <a class="nav-item nav-link" routerLink="/editprofile">🛠️ Edit profile</a>
+        </div>
+        <div class="col-auto">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" routerLink="/ucenik" >Profile</a>
+                
+                <a class="nav-item nav-link" routerLink="/nastavnici" >Teachers</a>
+                <a class="nav-item nav-link" routerLink="/classes">Classes</a>
+                
+                
+            <img *ngIf="ulogovan.avatar" src="{{ulogovan.avatar}}" class="img-fluid rounded-circle" style="width: 50px; height: 50px;" routerLink="/editprofile">
+            <img *ngIf="!ulogovan.avatar" src="assets/default.png" class="img-fluid rounded-circle" style="width: 50px; height: 50px;" routerLink="/editprofile">
+            
+        </div>
+            
+        </div>
+    </div>
+</nav>
+
+<br/>
+<div class="row">
+    <div class="col-md-12 d-flex justify-content-center align-items-center">
+        <img  *ngIf="ulogovan.avatar" src="{{ulogovan.avatar}}" class="img-fluid rounded-circle shadow" style="max-width: 400px; max-height: 400px;" >
+        <img  *ngIf="!ulogovan.avatar" src="assets/default.png" class="img-fluid rounded-circle shadow" style="max-width: 400px; max-height: 400px;" >
+    </div>
+  </div>
+
+
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="table-container">
+        <table class="table">
+
+           
+                
+                <tr>
+                    <th>Firstname </th>
+                    <td>{{ulogovan.firstname}} </td>
+                </tr>
+                <tr>
+                    <th>Lastname </th>
+                    <td>{{ulogovan.lastname}} </td>
+                </tr>
+                <tr>
+                    <th>Address </th>
+                    <td>{{ulogovan.address}} </td>
+                </tr>
+                <tr>
+                    <th>email </th>
+                    <td>{{ulogovan.email}} </td>
+                </tr>
+                <tr>
+                    <th>Phone </th>
+                    <td>{{ulogovan.phone}} </td>
+                </tr>
+                <tr>
+                    <th>School </th>
+                    <td>{{school}} </td>
+                </tr>
+                <tr>
+                    <th>Grade </th>
+                    <td>{{grade}} </td>
+                </tr>
+               
+        </table>
+        </div>
+    </div>
+</div>
+</div>
+
+

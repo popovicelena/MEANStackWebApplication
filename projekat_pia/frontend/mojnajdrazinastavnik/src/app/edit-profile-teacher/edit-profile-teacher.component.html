@@ -1,0 +1,135 @@
+
+<nav class="navbar navbar-expand-lg navbar-light teal-green justify-content-between"> 
+  <div class="container">
+      <div class="navbar-nav">
+         
+        <button (click)="logout()" class="btn custom-button mx-1 rounded-pill"><i class="fas fa-sign-out-alt"></i>🔓 Logout</button>
+          <a routerLink="/changepassword" class="nav-item nav-link">🔑 Change password</a>
+         
+      </div>
+      <div class="col-auto">
+          <div class="navbar-nav">
+              <a class="nav-item nav-link" routerLink="/nastavnik" >Profile</a>
+              
+              <a class="nav-item nav-link" routerLink="/teacherclasses" >Teachers</a>
+              <a class="nav-item nav-link" routerLink="/mystudents">Classes</a>
+              
+              
+          <img *ngIf="ulogovan.avatar && !showimage" src="{{ulogovan.avatar}}" class="img-fluid rounded-circle" style="width: 50px; height: 50px;">
+          <img  *ngIf="!ulogovan.avatar && !showimage" src="assets/default.png" class="img-fluid rounded-circle" style="width: 50px; height: 50px;">
+          <img *ngIf="showimage" src="{{imageBlob}}" class="img-fluid rounded-circle" style="width: 50px; height: 50px;">
+      </div>
+          
+      </div>
+  </div>
+</nav>
+<br/>
+<div class="row">
+    <div class="col-md-12 d-flex justify-content-center align-items-center">
+        <img *ngIf="ulogovan.avatar && !showimage" src="{{ulogovan.avatar}}"class="img-fluid rounded-circle shadow" style="max-width: 400px; max-height: 400px;" >
+        <img  *ngIf="!ulogovan.avatar && !showimage" src="assets/default.png" class="img-fluid rounded-circle shadow" style="max-width: 400px; max-height: 400px;" >
+        <img   *ngIf="showimage" src="{{imageBlob}}" class="img-fluid rounded-circle shadow" style="max-width: 400px; max-height: 400px;" >
+    </div>
+  </div>
+
+
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="table-container">
+          <table class="table">
+            <tr>
+                <th>Firstname </th>
+                <input type="text"  [(ngModel)]="firstname" class="form-control rounded" style="width: 250px;">
+            </tr>
+            <tr>
+                <th>Lastname </th>
+                <input type="text"  [(ngModel)]="lastname" class="form-control rounded" style="width: 250px;">
+            </tr>
+            <tr>
+                <th>Address </th>
+                <input type="text"   [(ngModel)]="address" class="form-control rounded" style="width: 250px;">
+            </tr>
+            <tr>
+                <th>email </th>
+                <input type="text"  [(ngModel)]="email" class="form-control rounded" style="width: 250px;">
+            </tr>
+            <tr>
+                <th>Phone </th>
+                <input type="text"   [(ngModel)]="phone" class="form-control rounded" style="width: 250px;">
+            </tr> 
+            <tr>
+                <th>Grade </th>
+                <select name="schoolType" [(ngModel)]="grade" class="form-select form-select-sm rounded custom-select" style="width: 250px;">
+                    <option value="1-4">Osnovna škola 1-4. razred</option>
+                    <option value="5-8">Osnovna škola 5-8. razred</option>
+                    <option value="srednja skola">Srednja škola</option>
+                  </select>
+                
+            </tr>
+            <tr>
+              <th>Your subjcets </th>
+              <td>
+              <ul *ngFor="let s of teacher.subjects">
+                
+                  <div class="d-flex justify-content-left mt-3">
+                    <li>{{s}}
+                      <button (click)="delete(s)" class="btn custom-button mx-1 rounded-pill" >Delete subject</button>
+                    </li>
+                    
+                  </div>
+                  
+                
+              </ul>
+              </td>
+           
+              
+          </tr>
+          <tr>
+            <th>Add subject:</th>
+            <td>
+             
+              <div class="d-flex justify-content-left mt-0">
+                
+                <input type="text" [(ngModel)]="addsubj"  class="form-control rounded" style="width: 250px;">
+                <button (click)="add()" class="btn custom-button mx-1 rounded-pill">add</button>
+              </div>
+              <span class="greska" style="text-align: center;">{{message}}</span>
+            </td>
+          </tr>
+
+          <tr>
+            <th>Edit  profile picture:</th>
+            <td>
+              <div class="d-flex justify-content-center mt-3">
+                <input type="file" (change)="onFileSelected($event)">
+                <button *ngIf="format==false && size==false" (click)="onUpload()" class="btn custom-button mx-1 rounded-pill" >Upload file</button>
+              </div>
+              <div *ngIf="format==true">
+                Format has to be .png or .jpeg!
+              </div>
+              <div *ngIf="size==true">
+                Min size 100x100px, max size 300x300px!
+              </div>
+            </td>
+            
+          </tr>
+          
+        </table>
+        <div class="d-flex justify-content-center mt-3">
+ 
+          <button  (click)="cancel()"  class="btn custom-button mx-1 rounded-pill">Cancel</button>
+        
+          <button  (click)="save()"  class="btn custom-button mx-1 rounded-pill" >Save</button>
+          
+          
+        </div>
+        <span class="greska" style="text-align: center;">{{errormessage}}</span>
+        <br/>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+

@@ -1,0 +1,137 @@
+<nav class="navbar navbar-expand-lg navbar-light teal-green justify-content-between"> 
+    <div class="container">
+        <div class="navbar-nav">
+           
+            <button (click)="logout()" class="btn custom-button mx-1 rounded-pill"><i class="fas fa-sign-out-alt"></i>🔓 Logout</button>
+           
+        </div>
+        <div class="col-auto">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" routerLink="/nastavnik" >Profile</a>
+                
+                <a class="nav-item nav-link" routerLink="/teacherclasses" >Classes</a>
+                <a class="nav-item nav-link" routerLink="/mystudents">My students</a>
+                
+                
+            <img *ngIf="ulogovan.avatar" src="{{ulogovan.avatar}}" class="img-fluid rounded-circle" style="width: 50px; height: 50px;">
+            <img  *ngIf="!ulogovan.avatar" src="assets/default.png" class="img-fluid rounded-circle" style="width: 50px; height: 50px;">
+           
+        </div>
+            
+        </div>
+    </div>
+  </nav>
+  <br/>
+
+
+<div class="container mt-5">
+    <div class="row justify-content-right">
+      <div class="col-md-6">
+        <div class="table-container">
+            <button (click)="showAll()" class="btn custom-button mx-1 rounded-pill">Show all scheduled classes</button>
+            <h3>Scheduled classes</h3>
+                <table *ngIf="showall && futureclasses.length>0;else noClasses1" class="table" >
+                    <tr>
+                        <th>Subject</th>
+                        <th>Student</th>
+                        <th>Time</th>
+                        <th>Join class</th>
+                        
+                    </tr>
+                    <tr *ngFor="let s of futureclasses">
+                        <td>{{s.subject}}</td>
+                        <td>{{s.firstname}} {{s.lastname}}</td>
+                        <td>{{s.formatedtime}}</td>
+                        <td>
+                            <button *ngIf="s.join">Join class</button>
+                        </td>
+
+                    </tr>
+                </table>
+                <table *ngIf="!showall && firstfive.length>0;else noClasses" class="table">
+                    <tr>
+                        <th>Subject</th>
+                        <th>Student</th>
+                        <th>Time</th>
+                        <th>Join class</th>
+                        
+                    </tr>
+                    <tr *ngFor="let s of firstfive">
+                        <td>{{s.subject}}</td>
+                        <td>{{s.firstname}} {{s.lastname}}</td>
+                        <td>{{s.formatedtime}}</td>
+                        <td>
+                            <button *ngIf="s.join">Join class</button>
+                        </td>
+                
+                    </tr>
+                </table>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row justify-content-right">
+      <div class="col-md-6">
+        <div class="table-container">
+            <h3>Class requests</h3>
+                <table *ngIf="teacher.classRequests.length>0;else noRequests" class="table" >
+
+                <tr>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Subject</th>
+                    <th>Topics</th>
+                    <th>Time</th>
+                    <th>Average grade</th>
+                    <th>A/D</th>
+                    <th></th>
+                </tr>
+                <tr *ngFor="let s of teacher.classRequests">
+                    <td>{{s.firstname}}</td>
+                    <td>{{s.lastname}}</td>
+                    <td>{{s.subject}}</td>
+                    <td>{{s.themes}}</td>
+                    <td >{{s.formatedBegin}} - {{s.formattedEnd}}</td>
+                    <td *ngIf="s.avg!=0" style="text-align: center;">{{s.avg.toFixed(2)}}</td>
+                    <td *ngIf="s.avg==0" style="text-align: center;" >/</td>
+                    <td>
+                        <div class="d-flex justify-content-center mt-3">
+                            <button class="btn custom-button mx-1 rounded-pill" (click)="accept(s.idN,s.subject,s.firstname,s.lastname,s.begin,s.doubleClass,s.end,s.themes,s.studentusername)" >Accept</button>
+                            <button (click)="deny(s.idN,s.canceled)" class="btn custom-button mx-1 rounded-pill">Deny</button>
+                           
+                          </div>
+                      
+                    </td>
+                    <td>
+                        <textarea placeholder="comment in case you deny" [(ngModel)]="s.canceled" style="border-color: #008080; border-radius: 8px;"></textarea>
+                    </td>
+
+                </tr>
+
+
+                </table>
+        </div>
+      </div>
+    </div>
+</div>
+<ng-template #noClasses>
+    <ng-container *ngIf="!showAll">
+        No such classes
+    </ng-container>
+   
+</ng-template>
+<ng-template #noClasses1>
+    <ng-container *ngIf="showAll">
+        No such classes
+    </ng-container>
+  
+</ng-template>
+<ng-template #noRequests>
+    <ng-container *ngIf="showAll">
+        No requests
+    </ng-container>
+  
+</ng-template>
+

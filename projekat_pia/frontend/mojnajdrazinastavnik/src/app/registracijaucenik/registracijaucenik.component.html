@@ -1,0 +1,54 @@
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="table-container">
+        <table class="table">
+          <tr>
+              <td><label>School:</label></td>
+              <td>
+                <select name="schoolType" [(ngModel)]="skola" class="form-select form-select-sm rounded custom-select">
+                  <option value="osnovna">Osnovna škola</option>
+                  <option value="srednja-gimnazija">Srednja škola - Gimnazija</option>
+                  <option value="srednja-strucna">Srednja škola - Stručna</option>
+                  <option value="srednja-umetnicka">Srednja škola - Umetnička</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td><label>Grade:</label></td>
+              <td *ngIf="skola =='osnovna'">
+                <select name="razred" [(ngModel)]="razred" class="form-select form-select-sm rounded custom-select">
+                  <option *ngFor="let i of osnovnaRazredi" [value]="i">{{i}}</option>
+                </select>
+              </td>
+              <td *ngIf="skola == 'srednja-gimnazija' || skola == 'srednja-strucna' || skola == 'srednja-umetnicka'" >
+                  <select name="razred" [(ngModel)]="razred" class="form-select form-select-sm rounded custom-select">
+                    <option *ngFor="let i of srednjaRazredi" [value]="i">{{i}}</option>
+                  </select>
+                </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <div class="d-flex justify-content-center mt-3">
+                  <button class="btn custom-button mx-1 rounded-pill" (click)="registrujse()" >Register</button>
+                  
+                 
+                </div>
+                <span class="greska">{{errormessage}}</span>
+              </td>
+           
+          </tr>
+        </table>
+        <div class="d-flex justify-content-center mt-3">
+          
+          <button class="btn custom-button mx-1 rounded-pill" (click)="back()" >&#8592;Back</button>
+          <button class="btn custom-button mx-1 rounded-pill" (click)="cancel()" > Cancel</button>
+          
+         
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
